@@ -14,18 +14,6 @@
 #include <cmath>
 #include "Fixed.hpp"
 
-int	powerOf2(int n)
-{
-	int	result = 1;
-
-	while (n > 0)
-	{
-		result = 2 * result;
-		n--;
-	}
-	return result;
-}
-
 Fixed::Fixed(void):_n(0), _nBits(8)
 {
 	//std::cout << "Default constructor called" << std::endl;
@@ -162,36 +150,33 @@ Fixed	Fixed::operator/(Fixed const fixed)
 	return result;
 }
 
-Fixed	&Fixed::operator++(void)
+Fixed	Fixed::operator++(int)
 {
-	this->setRawBits(this->getRawBits() + 1);
+	Fixed result(*this);
+	operator++();
+	return (result);
+}
+
+Fixed	Fixed::operator++(void)
+{
+	int	aux = this->getRawBits();
+	this->_n = aux + 1;
 	return *this;
 }
 
-Fixed	&Fixed::operator--(void)
+Fixed	Fixed::operator--(void)
 {
-	this->setRawBits(this->getRawBits() - 1);
+	int	aux = this->getRawBits();
+	this->_n = aux - 1;
 	return *this;
 }
 
-Fixed	Fixed::operator++(int value)
-{
-	Fixed	result;
-	result = *this;
-	if (!value)
-		value = 1;
-	result.setRawBits(this->getRawBits() + value);
-	return result;
-}
 
-Fixed Fixed::operator--(int value)
+Fixed	Fixed::operator--(int)
 {
-	Fixed	result;
-	result = *this;
-	if (!value)
-		value = 1;
-	result.setRawBits(this->getRawBits() - value);
-	return result;
+	Fixed result(*this);
+	operator--();
+	return (result);
 }
 
 Fixed & Fixed::max(Fixed & fixed1, Fixed & fixed2)

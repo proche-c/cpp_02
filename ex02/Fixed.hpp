@@ -42,10 +42,10 @@ class Fixed
 		Fixed	operator*(Fixed const fixed);
 		Fixed	operator/(Fixed const fixed);
 
-		Fixed	& operator++(void);
-		Fixed	& operator--(void);
-		Fixed	operator++(int value);
-		Fixed	operator--(int value);
+		Fixed	operator++(void);
+		Fixed	operator--(void);
+		Fixed	operator++(int);
+		Fixed	operator--(int);
 
 		static Fixed & max(Fixed & fixed1, Fixed & fixed2);
 		static const Fixed &max(Fixed const & fixed1, Fixed const & fixed2);
